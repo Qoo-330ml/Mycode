@@ -45,3 +45,10 @@ echo "启动 Caddy..."
 systemctl enable caddy --now
 
 echo "Caddy微信代理，安装完成！"
+
+# 返回结果
+if [ "$port" == "80" ]; then
+    echo "您的代理接口为 http://${domain} 或 http://${ip_address}"
+else
+    echo "您的代理接口为 http://${domain}:${port} 或 http://${ip_address}:${port}"
+fi
