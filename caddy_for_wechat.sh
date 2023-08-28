@@ -25,20 +25,26 @@ read -p "请输入端口号 (默认为80，如被占用请更换): " port
 port=${port:-80}
 
 # 配置 Caddy
-echo "正在将微信代理配置写入 Caddy..."
-cat <<EOF >/etc/caddy/Caddyfile
+echo "正在将微信代理配置写入 vhost/wechat.conf..."
+cat <<EOF >/etc/caddy/vhost/wechat.conf
 EOF
 
 if [ "$use_domain" == "y" ]; then
-    echo "${domain}:${port} {" >> /etc/caddy/Caddyfile
+    echo "${domain}:${port} {" >> /etc/caddy/vhost/wechat.conf
 else
-    echo "${ip_address}:${port} {" >> /etc/caddy/Caddyfile
+    echo ":${port} {" >> /etc/caddy/vhost/wechat.conf
 fi
 
-echo "    reverse_proxy https://qyapi.weixin.qq.com {" >> /etc/caddy/Caddyfile
-echo "        header_up Host {upstream_hostport}" >> /etc/caddy/Caddyfile
-echo "    }" >> /etc/caddy/Caddyfile
-echo "}" >> /etc/caddy/Caddyfile
+echo "    reverse_proxy https://qyapi.weixin.qq.com {" >> /etc/caddy/vhost/wechat.conf
+echo "        header_up Host {upstream_hostport}" >> /etc/caddy/vhost/wechat.conf
+echo "    }" >> /etc/caddy/vhost/wechat.conf
+echo "}" >> /etc/caddy/vhost/wechat.conf
+
+cat <<EOF >/etc/caddy/Caddyfile
+{
+    import /etc/caddy/vhost/*.conf
+}
+EOF
 
 # 启动 Caddy
 echo "启动 Caddy..."
@@ -47,8 +53,8 @@ systemctl enable caddy --now
 echo "Caddy微信代理，安装完成！"
 
 # 返回结果
-if [ "$port" == "80" ]; then
-    echo "您的代理接口为 http://${domain} 或 http://${ip_address}"
+if [ "$use_domain" == "y" ]; then
+    echo "您的代理接口为 http://${domain}:${port}"
 else
-    echo "您的代理接口为 http://${domain}:${port} 或 http://${ip_address}:${port}"
+    echo "您的代理接口为 http://${ip_address}:${port}"
 fi
