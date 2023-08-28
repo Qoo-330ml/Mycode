@@ -17,7 +17,13 @@ if ! command -v caddy &> /dev/null; then
 fi
 
 echo "Caddy已安装，继续配置微信代理..."
+
+# 创建 /etc/caddy/vhost 目录
+mkdir -p /etc/caddy/vhost
+
+# 创建 /etc/caddy/vhost/wechat.conf 文件
 touch /etc/caddy/vhost/wechat.conf
+
 
 echo "开始配置微信代理..."
 # 获取用户输入的域名或 IP 地址
