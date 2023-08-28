@@ -55,7 +55,7 @@ echo "        header_up Host {upstream_hostport}" >> /etc/caddy/vhost/wechat.con
 echo "    }" >> /etc/caddy/vhost/wechat.conf
 echo "}" >> /etc/caddy/vhost/wechat.conf
 
-cat <<EOF >/etc/caddy/Caddyfile
+cat <<EOF >>/etc/caddy/Caddyfile
 {
     import /etc/caddy/vhost/*.conf
 }
