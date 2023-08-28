@@ -25,7 +25,7 @@ read -p "请输入端口号 (默认为80，如被占用请更换): " port
 port=${port:-80}
 
 # 配置 Caddy
-echo "正在将微信代理配置写入 vhost/wechat.conf..."
+echo "正在将微信代理配置写入 Caddyfile..."
 cat <<EOF >/etc/caddy/vhost/wechat.conf
 EOF
 
