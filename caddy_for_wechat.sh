@@ -10,6 +10,15 @@ apt update
 echo "正在安装 Caddy..."
 apt install -y caddy
 
+# 检测Caddy是否已安装
+if ! command -v caddy &> /dev/null; then
+    echo "Caddy未被正确安装，请检查网络并重新安装Caddy。"
+    exit 1
+fi
+
+echo "Caddy已安装，继续配置微信代理..."
+touch /etc/caddy/vhost/wechat.conf
+
 echo "开始配置微信代理..."
 # 获取用户输入的域名或 IP 地址
 read -p "是否使用域名？(y/n): " use_domain
