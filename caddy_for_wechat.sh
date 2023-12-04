@@ -8,7 +8,7 @@ curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | gpg --dearmo
 echo "deb [signed-by=/usr/share/keyrings/caddy-archive-keyring.gpg] https://dl.cloudsmith.io/public/caddy/stable/deb/debian any-version main" | tee /etc/apt/sources.list.d/caddy.list
 apt update
 echo "正在安装 Caddy..."  
-apt install -y caddy
+apt install caddy
 
 # 检测Caddy是否已安装
 if ! command -v caddy &> /dev/null; then
