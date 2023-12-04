@@ -37,20 +37,20 @@ read -p "请选择要代理的应用:
 
 
 # 根据选择生成配置
-if [ "$app" == "1" ]; then
+if [[ "$app" == "1" ]]; then
   filename="wechat"
   proxy_url="https://qyapi.weixin.qq.com"
-elif [ "$app" == "2" ]; then
+elif [[ "$app" == "2" ]]; then
   filename="telegram"
   proxy_url="https://api.telegram.org"  
-elif [ "$app" == "3" ]; then
+elif [[ "$app" == "3" ]]; then
   read -p "请输入代理名称:" filename
   read -p "请输入接口地址:" proxy_url
 fi
 
 read -p "是否使用域名?(y/n): " use_domain
 
-if [ "$use_domain" == "y" ]; then
+if [[ "$use_domain" == "y" ]]; then
   read -p "请输入您的域名: " domain
 else
   ip_address=$(curl -sS ipinfo.io/ip)  
