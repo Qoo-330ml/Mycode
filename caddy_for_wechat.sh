@@ -85,7 +85,7 @@ systemctl enable caddy --now
 
 # 返回结果
 if [ "$use_domain" == "y" ]; then
-   echo "您选择的应用是${app},代理接口为 http://${domain}:${port}"
+   echo "您选择的应用是${app},代理接口为 http://${domain}:${port}，使用前请确保该域名已经被正确解析"
 else
    echo "您选择的应用是${app},代理接口为 http://${ip_address}:${port}"
 fi
