@@ -19,7 +19,7 @@ chmod +x caddy_for_wechat.sh
 2. 运行：
 
 ```shell
-sh caddy_for_wechat.sh
+bash caddy_for_wechat.sh
 ```
 
 
