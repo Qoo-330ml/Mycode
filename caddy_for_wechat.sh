@@ -10,11 +10,21 @@ apt update
 echo "正在安装 Caddy..."  
 apt install caddy
 
-# 检测Caddy是否已安装
-if ! command -v caddy &> /dev/null; then
-    echo "Caddy未被正确安装,请检查网络并重新安装Caddy。"
-    exit 1
+# 检查Caddy是否安装
+if ! which caddy >/dev/null 2>&1; then
+  echo "Caddy未安装,请先安装caddy"
+  exit 1
 fi
+
+# 获取Caddy版本,如果获取失败也认为未安装
+caddy_version=$(caddy version 2>/dev/null)  
+if [ -z "$caddy_version" ]; then
+  echo "Caddy安装有问题,请检查安装"
+  exit 1
+fi
+
+echo "Caddy版本:$caddy_version"
+
 
 echo "Caddy已安装,继续配置代理..."
 
