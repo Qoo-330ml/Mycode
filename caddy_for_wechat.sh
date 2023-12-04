@@ -44,8 +44,8 @@ elif [ "$app" == "2" ]; then
   filename="telegram"
   proxy_url="https://api.telegram.org"  
 elif [ "$app" == "3" ]; then
-  read -p "请输入代理名称:" filename
-  read -p "请输入接口地址:" proxy_url
+  read -p "请输入代理名称: " filename
+  read -p "请输入接口地址: " proxy_url
 fi
 
 read -p "是否使用域名?(y/n): " use_domain
