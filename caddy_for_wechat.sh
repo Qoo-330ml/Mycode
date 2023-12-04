@@ -16,15 +16,15 @@ if ! which caddy >/dev/null 2>&1; then
   exit 1
 fi
 
-# 获取Caddy版本,如果获取失败也认为未安装
-caddy_version=$(caddy version 2>/dev/null)  
+# 尝试获取Caddy版本
+caddy_version=$(caddy version 2>/dev/null)
+
+# 如果获取版本失败,可能是caddy安装但配置不正确
 if [ -z "$caddy_version" ]; then
-  echo "Caddy安装有问题,请检查安装"
-  exit 1
+  echo "无法获取Caddy版本,请检查Caddy安装和配置"
+else
+  echo "Caddy版本:$caddy_version"
 fi
-
-echo "Caddy版本:$caddy_version"
-
 
 echo "Caddy已安装,继续配置代理..."
 
