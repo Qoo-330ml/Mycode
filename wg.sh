@@ -15,10 +15,14 @@ if [ ! -d "$DATA_DIR" ]; then
   echo "已创建目录: $DATA_DIR"
 fi
 
+# 检测本地IP地址
+LOCAL_IP=$(ip route get 1 | awk '{print $NF;exit}')
+
 # 构建docker命令
 DOCKER_COMMAND="docker run -d \
   --name=wg-easy \
   -e WG_HOST=${SERVER_IP} \
+  -e WEBUI_HOST=${LOCAL_IP} \
   -e PASSWORD=${ADMIN_PASSWORD} \
   -v ${DATA_DIR}:/etc/wireguard \
   -p 51820:51820/udp \
