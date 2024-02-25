@@ -30,5 +30,6 @@ jobs:
       with: 
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
         publish_dir: ./rules
+        enable_jekyll: false
         external_repository: Qoo-330ml/Clash_rules
         publish_branch: main
