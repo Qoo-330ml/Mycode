@@ -32,3 +32,76 @@ jobs:
         publish_dir: ./rules
         external_repository: Qoo-330ml/Clash_rules
         publish_branch: main
+        
+        
+    - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Auto commit: Deploy build files
+          repository: Qoo-330ml/Clash_rules
+          branch: main
+          commit_user_name: Qoo-330ml
+
+
+
+
+
+name: Convert Rules
+
+on: [push]
+
+jobs:
+  convert_rules:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+
+    - name: Run Python script
+      run: 
+        python scripts/convert_rules.py
+        
+    #- name: Setup Debug Session
+    #  uses: csexton/debugger-action@master
+        
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with: 
+        personal_token: ${{ secrets.PERSONAL_TOKEN }}
+        publish_dir: ./rules
+        external_repository: Qoo-330ml/Clash_rules
+        publish_branch: main
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+      with:
+        tag_name: v1.0.0  # 指定 release 的 tag 名称
+        release_name: Release v1.0.0  # release 的名称
+        body: |
+          Release notes for v1.0.0
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+        PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./rules
+        asset_name: *.txt
+        asset_content_type: text/plain
