@@ -35,5 +35,5 @@ jobs:
         git commit -m "Add generated file to rules folder"
         git push https://github.com/Qoo-330ml/Mycode HEAD:${{ github.ref }}
       env:
-        PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
