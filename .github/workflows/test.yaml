@@ -40,6 +40,7 @@ jobs:
           
     - name: Copy artifacts
         run: |
+          mkdir -p rules
           cp -r ${{ github.workspace }}/rules/* ./rules/
         
       - name: Commit and push changes
