@@ -21,10 +21,11 @@ jobs:
 
     - name: Run Python script
       run: 
+        mkdir rules && cd rules
         python scripts/convert_rules.py
         
-    #- name: Setup Debug Session
-    #  uses: csexton/debugger-action@master
+    - name: Setup Debug Session
+      uses: csexton/debugger-action@master
         
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
@@ -34,34 +35,4 @@ jobs:
         external_repository: Qoo-330ml/Clash_rules
         publish_branch: main
 
-    - name: Commit and push changes
-      uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: Autocommit
-        repository: Qoo-330ml/Clash_rules
-        branch: main
-        commit_user_name: Qoo-330ml
 
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: v1.0.0  # 指定 release 的 tag 名称
-        release_name: Release v1.0.0  # release 的名称
-        body: |
-          Release notes for v1.0.0
-        draft: false
-        prerelease: false
-
-    - name: Upload Release Asset
-      id: upload-release-asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./rules/*.txt
-        asset_name: ${{ github.event.inputs.asset_name }}
-        asset_content_type: text/plain
