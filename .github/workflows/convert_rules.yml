@@ -21,7 +21,7 @@ jobs:
 
     - name: Run Python script
       run: 
-        mkdir rules
+        mkdir -p rules
         python scripts/convert_rules.py
         
     - name: Setup Debug Session
