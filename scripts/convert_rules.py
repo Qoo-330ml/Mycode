@@ -14,9 +14,9 @@ if response.status_code == 200:
     release_info = response.json()
     assets = release_info['assets']
 
-    # 创建一个名为"rules"的文件夹
-    if not os.path.exists("rules"):
-        os.makedirs("rules")
+    # 创建一个名为"rules/text"的文件夹
+    if not os.path.exists("rules/text"):
+        os.makedirs("rules/text")
 
     # 遍历每个文件
     for asset in assets:
@@ -37,8 +37,8 @@ if response.status_code == 200:
         pattern = re.compile(r"'(?:\+\.)?(.*?)'")
         converted_content = '\n'.join(re.findall(pattern, online_file_content))
 
-        # 保存为本地文件，保存到"rules"文件夹中
-        with open(os.path.join("rules", filename), 'w') as file:
+        # 保存为本地文件，保存到"rules/text"文件夹中
+        with open(os.path.join("rules/text", filename), 'w') as file:
             file.write(converted_content)
 
         print(f"已将转换内容保存到文件: {filename}")
