@@ -1,9 +1,9 @@
-name: Convert Rules
+name: Convert Rules2
 
 on: [push]
 
 jobs:
-  convert_rules:
+  convert_rules2:
     runs-on: ubuntu-latest
 
     steps:
