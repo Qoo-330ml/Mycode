@@ -46,7 +46,7 @@ jobs:
       id: create_release
       uses: actions/create-release@v1
       env:
-        personal_token: ${{ secrets.PERSONAL_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: v1.0.0  # 指定 release 的 tag 名称
         release_name: Release v1.0.0  # release 的名称
@@ -59,7 +59,7 @@ jobs:
       id: upload-release-asset
       uses: actions/upload-release-asset@v1
       env:
-        personal_token: ${{ secrets.PERSONAL_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./rules
