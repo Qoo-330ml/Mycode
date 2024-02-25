@@ -1,0 +1,51 @@
+name: Convert Rules
+
+on: [push]
+
+jobs:
+  convert_rules:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+    - name: Run Python script
+      run: 
+        python scripts/convert_rules.py
+        
+    #- name: Setup Debug Session
+    #  uses: csexton/debugger-action@master
+        
+    - name: Publish
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifact
+          path: ./rules
+
+    - name: Clone public repository
+        uses: actions/checkout@v2
+        with:
+          repository: Qoo-330ml/Clash_rules
+          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          ref: main
+          
+    - name: Copy artifacts
+        run: |
+          cp -r ${{ github.workspace }}/rules/* ./rules/
+        
+      - name: Commit and push changes
+        run: |
+          git config --global user.email "1924943697@qq.com"
+          git config --global user.name "Qoo-330ml"
+          git add .
+          git commit -m "Add build artifacts"
+          git push
