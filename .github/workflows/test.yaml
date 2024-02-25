@@ -34,7 +34,10 @@ jobs:
         repository: Qoo-330ml/Clash_rules
         PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         ref: main
-
+        
+    - name: Setup Debug Session
+      uses: csexton/debugger-action@master
+    
     - name: Copy artifacts
       run: |
         cp -r ${{ github.workspace }}/rules/* ./rules/
