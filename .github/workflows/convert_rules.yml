@@ -33,7 +33,7 @@ jobs:
         git config --global credential.helper cache
         git add rules/*.txt
         git commit -m "Add generated file to rules folder"
-        git push https://github.com/Qoo-330ml/Mycode HEAD:${{ github.ref }}
+        git push git@github.com:Qoo-330ml/Mycode.git HEAD:${{ github.ref }}
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
