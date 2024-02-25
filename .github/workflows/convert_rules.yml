@@ -30,5 +30,5 @@ jobs:
       with: 
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
         publish_dir: ./rules
-        external_repository: Qoo-330ml/Clash_rules
+        external_repository: Qoo-330ml/Clash_rules/rules
         publish_branch: main
