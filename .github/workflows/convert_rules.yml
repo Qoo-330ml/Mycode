@@ -26,14 +26,19 @@ jobs:
     #- name: Setup Debug Session
     #  uses: csexton/debugger-action@master
         
-    - name: Commit and Push
+    - name: Set up Git
       run: |
-        git config --local user.email "1924943697@qq.com"
-        git config --local user.name "Qoo-330ml"
-        git config --global credential.helper cache
-        git add rules/*.txt
-        git commit -m "Add generated file to rules folder"
-        git push git@github.com:Qoo-330ml/Mycode.git HEAD:${{ github.ref }}
-      env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        git config --global user.email "1924943697@qq.com"
+        git config --global user.name "Qoo-330ml"
 
+    - name: Add and commit changes
+      run: |
+        git add rules/*.txt
+        git commit -m "Add new file"
+        git push
+
+    - name: Push changes to repository
+      uses: ad-m/github-push-action@master
+      with:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        branch: main
