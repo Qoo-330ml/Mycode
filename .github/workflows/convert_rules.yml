@@ -23,8 +23,8 @@ jobs:
       run: 
         mkdir -p rules && python scripts/convert_rules.py
         
-    - name: Setup Debug Session
-      uses: csexton/debugger-action@master
+    #- name: Setup Debug Session
+    #  uses: csexton/debugger-action@master
         
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
