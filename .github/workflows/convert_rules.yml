@@ -21,8 +21,7 @@ jobs:
 
     - name: Run Python script
       run: 
-        mkdir -p rules
-        python scripts/convert_rules.py
+        mkdir -p rules && python scripts/convert_rules.py
         
     - name: Setup Debug Session
       uses: csexton/debugger-action@master
