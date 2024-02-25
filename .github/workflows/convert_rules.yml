@@ -30,7 +30,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with: 
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
-        publish_dir: ./rules
+        publish_dir: ./
         external_repository: Qoo-330ml/Clash_rules
         publish_branch: main
 
