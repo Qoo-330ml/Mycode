@@ -28,12 +28,12 @@ jobs:
         
     - name: Commit and Push
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+        git config --local user.email "1924943697@qq.com"
+        git config --local user.name "Qoo-330ml"
         git config --global credential.helper cache
         git add rules/*.txt
         git commit -m "Add generated file to rules folder"
-        git push https://github.com/${{ github.repository }} HEAD:${{ github.ref }}
+        git push https://github.com/Qoo-330ml/Mycode HEAD:${{ github.ref }}
       env:
         PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
