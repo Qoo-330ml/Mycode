@@ -26,12 +26,11 @@ jobs:
     #- name: Setup Debug Session
     #  uses: csexton/debugger-action@master
         
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with: 
-        personal_token: ${{ secrets.PERSONAL_TOKEN }}
-        publish_dir: ./
-        external_repository: Qoo-330ml/Clash_rules
-        publish_branch: main
-
+    - name: Commit and Push
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add rules/*.txt
+        git commit -m "Add generated file to rules folder"
+        git push
 
