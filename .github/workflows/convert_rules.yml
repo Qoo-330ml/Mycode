@@ -37,7 +37,7 @@ jobs:
     - name: Commit and push changes
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
-        commit_message: Auto commit: Deploy build files
+        commit_message: Autocommit
         repository: Qoo-330ml/Clash_rules
         branch: main
         commit_user_name: Qoo-330ml
