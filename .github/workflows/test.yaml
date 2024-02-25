@@ -41,7 +41,7 @@ jobs:
     - name: Copy artifacts
       run: |
         mkdir -p rules
-        cp -r ${{ github.workspace }}/* ./rules/
+        cp -r ${{ github.workspace }}/*.txt ./rules/
 
     - name: Commit and push changes
       run: |
